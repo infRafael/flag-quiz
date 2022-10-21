@@ -1,0 +1,117 @@
+<html>
+    <head>
+        <title>TESTE DE BANDEIRAS</title>
+    </head>
+    <body>
+        <style>
+            *{
+                background-color: #fffff0;
+            }
+            .organizar{
+                text-align: center !important;
+                align-self: center;
+                margin-top: 8%;
+            }
+            .btn{
+                display:list-item;
+                width: 300px;
+                margin: 2px auto;
+                border: none;
+                background-color: rgba(0, 0, 0, 0.2);
+                padding: 20px;
+            }
+            .bandeira{
+                margin: 10px;
+                margin-bottom: 30px;
+                background-color: rgb(0,0,0); 
+                padding: 2px;
+            }
+        </style>
+        <div class="organizar">
+            <h1 class="titulo">Quiz de bandeiras</h1>
+            <img class="bandeira"></img>            
+            <button class="btn start" onclick="Comecar()"></button>
+            <button class="btn botao-0" onclick="Resposta(0)"></button>
+            <button class="btn botao-1" onclick="Resposta(1)"></button>
+            <button class="btn botao-2" onclick="Resposta(2)"></button>
+            <button class="btn botao-3" onclick="Resposta(3)"></button>
+            <button class="btn pular" onclick="Proximo()">Próximo</button>
+        </div>
+    </body>
+    <script>
+        var nums = [0,0,0,0];
+        var pontos = 0, tentativa = 0;
+        var repetidos = [];
+        document.querySelector('.start').textContent = "Começar";
+        document.querySelector('.botao-0').style.display = "none";
+        document.querySelector('.botao-1').style.display = "none";
+        document.querySelector('.botao-2').style.display = "none";
+        document.querySelector('.botao-3').style.display = "none";
+        document.querySelector('.pular').style.display = "none";
+        document.querySelector('.bandeira').style.backgroundColor = "#fffff0";
+        
+        function Pergunta(){
+            document.querySelector('.bandeira').style.backgroundColor = "rgb(0,0,0)";
+            do{
+                pais = Math.floor(Math.random() * 193);
+            }while(repetidos[pais] == 1); 
+            botao_certo =  Math.floor(Math.random() * 4);
+            paises = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cabo Verde", "The Central African Republic", "Chad", "Chile", "China", "Colombia", "The Comoros", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czechia", "Democratic Republic of Congo", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Timor-leste", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Côte D'ivoire", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "The Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "Republic Of North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", 
+            "Congo", "Romania", "Russian Federation", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome And Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "The Republic Of Korea", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syrian Arab Republic", "Tajikistan", "Tanzania", "Thailand", "The Bahamas", "the Federated States of Micronesia", "Gambia", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"];
+            paisespt = ["Afeganistão", "Albânia", "Argélia", "Andorra", "Angola", "Antígua e Barbuda", "Argentina", "Armênia", "Austrália", "Áustria", "Azerbaijão", "Bahrein" , "Bangladesh", "Barbados", "Bielorrússia", "Bélgica", "Belize", "Benin", "Butão", "Bolívia", "Bósnia e Herzegovina", "Botswana", "Brasil", "Brunei", "Bulgária", "Burkina Faso", "Burundi", "Camboja", "Camarões", "Canadá", "Cabo Verde", "República Centro-Africana", "Chade", "Chile", "China" , "Colômbia", "Comores", "Costa Rica", "Croácia", "Cuba", "Chipre", "Tcheca", "República Democrática do Congo", "Dinamarca", "Djibuti", "Dominica", "República Dominicana", "Timor-Leste", "Equador", "Egito", "El Salvador", "Guiné Equatorial", "Eritreia", "Estônia", "Eswatini", "Etiópia", "Fiji", " Finlândia", "França", "Gabão", "Geórgia", "Alemanha", "Gana", "Grécia", "Granada", "Guatemala", "Guiné", "Guiné-Bissau", "Guiana", " Haiti", "Honduras", "Hungria", 
+                        "Islândia", "Índia", "Indonésia", "Irã", "Iraque", "Irlanda", "Israel", "Itália", "Costa D'ivoire", "Jamaica", "Japão", "Jordânia", "Cazaquistão", "Quênia", "Kiribati", "Kuwait", "Quirguistão", "Laos", "Letônia", "Líbano", " Lesoto", "Libéria", "Líbia", "Liechtenstein", "Lituânia", "Luxemburgo", "Madagascar", "Malawi", "Malásia", "Maldivas", "Mali", "Malta", "Ilhas Marshall", "Mauritânia", "Maurícia", "México", "Moldávia", "Mônaco", "Mongólia", "Montenegro", "Marrocos", "Moçambique", "Mianmar", "Namíbia", "Nauru" , "Nepal", "Holanda", "Nova Zelândia", "Nicarágua", "Níger", "Nigéria", "Coreia do Norte", "República da Macedônia do Norte", "Noruega", "Omã", "Paquistão", "Palau", "Panamá", "Papua Nova Guiné","Paraguai", "Peru", "Filipinas", "Polônia", "Portugal", "Catar",
+            "Congo", "Roménia", "Federação Russa", "Ruanda", "São Cristóvão e Nevis", "Santa Lúcia", "São Vicente e Granadinas", "Samoa", "São Marino", "São Tomé e Príncipe", "Arábia Saudita", "Senegal", "Sérvia", "Seychelles", "Serra Leoa", "Singapura", "Eslováquia", "Eslovênia", "Ilhas Salomão", "Somália", "África do Sul" , "República da Coreia", "Sudão do Sul", "Espanha", "Sri Lanka", "Sudão", "Suriname", "Suécia", "Suíça", "República Árabe da Síria", "Tajiquistão", "Tanzânia", "Tailândia", "Bahamas", "Micronésia", "Gâmbia", "Togo", "Tonga", "Trinidad e Tobago", "Tunísia", "Turquia", "Turquemenistão", " Tuvalu", "Uganda", "Ucrânia", "Emirados Árabes Unidos", "Reino Unido", "Estados Unidos", "Uruguai", "Uzbequistão", "Vanuatu", "Venezuela", "Vietnã", "Iêmen" , "Zâmbia", "Zimbábue"];
+            document.querySelector('.bandeira').src = "https://countryflagsapi.com/png/"+paises[pais];
+            
+
+            do{
+                nums[0] = Math.floor(Math.random() * 193);
+            }while(nums[0] == pais);
+            do{
+                nums[1] = Math.floor(Math.random() * 193);
+            }while(nums[1] == nums[0] || nums[1] == pais);
+            do{
+                nums[2] = Math.floor(Math.random() * 193);
+            }while(nums[2] == nums[1] || nums[2] == nums[0] || nums[2] == pais);
+            do{
+                nums[3] = Math.floor(Math.random() * 193);
+            }while(nums[3] == nums[2] || nums[3] == nums[1] || nums[3] == nums[0] || nums[3] == pais);
+            
+            for (var x = 0; x < 4; x++){
+                document.querySelector('.botao-'+x).style.backgroundColor = "rgba(0, 0, 0, 0.2)";
+                document.querySelector('.botao-'+x).style.display = "";
+                document.querySelector('.botao-'+x).textContent = paisespt[nums[x]];
+            }
+            document.querySelector('.botao-'+botao_certo).textContent = paisespt[pais];
+            repetidos[pais] = 1;
+        }          
+        
+        function Resposta(val){
+            if(tentativa == 0){
+                tentativa++;
+                if(val == botao_certo){
+                    pontos++;
+                }else{
+                    document.querySelector('.botao-'+val).style.backgroundColor = "rgba(255, 0, 0, 0.6)";
+                    console.log("a");
+                   
+                }
+                document.querySelector('.botao-'+botao_certo).style.backgroundColor = "rgba(0, 255, 0, 0.6)";
+            }
+            
+            document.querySelector('.pular').style.display = "";
+        }
+        function Proximo(){
+            tentativa = 0;
+            document.querySelector('.pular').style.display = "none";
+            Pergunta();
+        }
+        function Comecar(){
+            document.querySelector('.start').style.display = "none";
+            Pergunta();
+        }
+        function Recomecar(){
+            respetidos = [];
+        }
+    </script>
+</html>
