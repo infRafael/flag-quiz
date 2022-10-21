@@ -48,10 +48,10 @@
         document.querySelector('.botao-2').style.display = "none";
         document.querySelector('.botao-3').style.display = "none";
         document.querySelector('.pular').style.display = "none";
-        document.querySelector('.bandeira').style.backgroundDisplay = "none";
+        document.querySelector('.bandeira').style.backgroundColor = "#fffff0";
         
         function Pergunta(){
-            document.querySelector('.bandeira').style.backgroundDisplay = "";
+            document.querySelector('.bandeira').style.backgroundColor = "rgb(0,0,0)";
             do{
                 pais = Math.floor(Math.random() * 193);
             }while(repetidos[pais] == 1); 
