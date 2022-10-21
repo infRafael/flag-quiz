@@ -23,7 +23,7 @@
             .bandeira{
                 margin: 10px;
                 margin-bottom: 30px;
-                background-color: rgb(200,100,255); 
+                background-color: rgb(0,0,0); 
                 padding: 8px;
             }
         </style>
@@ -48,8 +48,10 @@
         document.querySelector('.botao-2').style.display = "none";
         document.querySelector('.botao-3').style.display = "none";
         document.querySelector('.pular').style.display = "none";
+        document.querySelector('.bandeira').style.backgroundDisplay = "none";
         
         function Pergunta(){
+            document.querySelector('.bandeira').style.backgroundDisplay = "";
             do{
                 pais = Math.floor(Math.random() * 193);
             }while(repetidos[pais] == 1); 
